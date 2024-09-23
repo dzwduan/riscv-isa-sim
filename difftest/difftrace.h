@@ -1,7 +1,9 @@
 #ifndef __DIFFTRACE_H
 #define __DIFFTRACE_H
 
-#include <bits/stdc++.h>
+#include <cmath>
+#include <cstdint>
+#include <cstdio>
 #include <queue>
 #include <unordered_set>
 #include "difftest-def.h"
