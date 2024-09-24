@@ -12,6 +12,7 @@
 #include <map>
 #include <vector>
 #include <assert.h>
+#include "term.h"
 
 class htif_t : public chunked_memif_t
 {

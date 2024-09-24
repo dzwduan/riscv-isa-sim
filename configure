@@ -6745,6 +6745,24 @@ fi
 
 
 
+    # Add subproject to our running list
+
+    subprojects="$subprojects flexicas"
+
+    # Process the subproject appropriately. If enabled add it to the
+    # $enabled_subprojects running shell variable, set a
+    # SUBPROJECT_ENABLED C define, and include the appropriate
+    # 'subproject.ac'.
+
+
+      { printf "%s\n" "$as_me:${as_lineno-$LINENO}: configuring default subproject : flexicas" >&5
+printf "%s\n" "$as_me: configuring default subproject : flexicas" >&6;}
+      ac_config_files="$ac_config_files flexicas.mk:flexicas/flexicas.mk.in"
+
+      enable_flexicas_sproj="yes"
+      subprojects_enabled="$subprojects_enabled flexicas"
+
+printf "%s\n" "#define FLEXICAS_ENABLED /**/" >>confdefs.h
 
 
 

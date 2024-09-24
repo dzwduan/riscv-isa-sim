@@ -7,7 +7,7 @@ TARGET    = $(BUILD_DIR)/$(GUEST_ISA)-spike-so
 
 # Dependencies for building Spike
 SPIKE_PATH     = $(abspath ..)
-SPIKE_TARGET   = $(BUILD_DIR)/spike
+SPIKE_TARGET   = $(BUILD_DIR)/bin/spike
 SPIKE_MAKEFILE = $(BUILD_DIR)/Makefile
 
 SPIKE_CFLAGS    = -O3 -DDIFFTEST

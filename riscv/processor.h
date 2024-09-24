@@ -244,6 +244,7 @@ class opcode_cache_entry_t {
   static const size_t associativity = 4;
   insn_bits_t tag[associativity];
   const insn_desc_t* contents[associativity];
+  int core_index;
 };
 
 // this class represents one processor in a RISC-V machine.
