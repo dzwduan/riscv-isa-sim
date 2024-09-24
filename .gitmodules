@@ -1,0 +1,4 @@
+[submodule "FlexiCAS"]
+	path = FlexiCAS
+	url = https://github.com/comparch-security/FlexiCAS.git
+	branch = spike
