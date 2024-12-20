@@ -4,6 +4,7 @@
 #define _RISCV_V_EXT_MACROS_H
 
 #include "vector_unit.h"
+#include <functional>
 
 //
 // vector: masking skip helper
@@ -2111,6 +2112,49 @@ reg_t index[P.VU.vlmax]; \
       require(0); \
       break; \
   }
+
+#define ZVMM_INIT(widen) \
+  unsigned vd_eew = P.VU.vsew * (widen); \
+  unsigned vd_emul = std::max(1U, unsigned((8 * vd_eew) / P.VU.VLEN)); \
+  unsigned vs2 = insn.rs2() & ~7; \
+  unsigned ci = (insn.rs2() & 7) * 8; \
+  require_vector(true); \
+  require(P.VU.vstart->read() == 0); \
+  require(P.VU.vflmul == 1); \
+  require(ci * vd_eew < P.VU.VLEN); \
+  require_align(insn.rd(), vd_emul); \
+  require_vm; \
+  require_noover(insn.rd(), vd_emul, insn.rs1(), 1); \
+  require_noover(insn.rd(), vd_emul, vs2, 8)
+
+template<typename in_t, typename out_t>
+out_t generic_dot_product(const std::vector<in_t>& a, const std::vector<in_t>& b, out_t c, std::function<out_t(in_t, in_t, out_t)> macc)
+{
+  for (size_t i = 0; i < a.size(); i++)
+    c = macc(a[i], b[i], c);
+  return c;
+}
+
+#define ZVMM_LOOP(in_t, out_t, dot) \
+  for (reg_t idx = 0; idx < 8; idx++) { \
+    reg_t i = ci + idx; \
+    VI_LOOP_ELEMENT_SKIP(); \
+    std::vector<in_t> a(P.VU.vl->read(), in_t()), b(P.VU.vl->read(), in_t()); \
+    for (reg_t k = 0; k < a.size(); k++) { \
+      a[k] = P.VU.elt<in_t>(insn.rs1(), k); \
+      b[k] = P.VU.elt<in_t>(vs2 + idx, k); \
+    } \
+    auto& acc = P.VU.elt<out_t>(insn.rd(), i, true); \
+    acc = dot(a, b, acc); \
+  }
+
+#define ZVMM_GENERIC_LOOP(in_t, out_t, macc) \
+  auto dot = std::bind(generic_dot_product<in_t, out_t>, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, macc); \
+  ZVMM_LOOP(in_t, out_t, dot)
+
+#define ZVMM_SIMPLE_LOOP(in_t, out_t) \
+  auto macc = [](auto a, auto b, auto c) { return c + decltype(c)(a) * decltype(c)(b); }; \
+  ZVMM_GENERIC_LOOP(in_t, out_t, macc)
 
 #define P_SET_OV(ov) \
   if (ov) P.VU.vxsat->write(1);

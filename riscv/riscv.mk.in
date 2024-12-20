@@ -1062,6 +1062,12 @@ riscv_insn_ext_zvksh = \
 	vsm3c_vi \
 	vsm3me_vv \
 
+riscv_insn_ext_zvmm = \
+	vfmmacc_vv \
+	vfwmmacc_vv \
+	vqmmacc_s_vv \
+	vqmmacc_u_vv \
+
 riscv_insn_ext_zimop = \
 	mop_r_N \
 	mop_rr_N \
@@ -1118,6 +1124,7 @@ riscv_insn_list = \
 	$(riscv_insn_ext_zfh_zfa) \
 	$(riscv_insn_ext_zicond) \
 	$(riscv_insn_ext_zvk) \
+	$(riscv_insn_ext_zvmm) \
 	$(riscv_insn_priv) \
 	$(riscv_insn_smrnmi) \
 	$(riscv_insn_svinval) \
