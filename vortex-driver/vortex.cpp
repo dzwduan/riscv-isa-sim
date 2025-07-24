@@ -17,7 +17,7 @@ extern int vx_dev_open(vx_device_h* hdevice) {
 
 // Close the device when all the operations are done
 extern int vx_dev_close(vx_device_h hdevice) {
-    if (hdevice == NULL) {
+    if (hdevice == nullptr) {
         fprintf(stderr, "vx_dev_close: hdevice is NULL\n");
         return -1;
     }

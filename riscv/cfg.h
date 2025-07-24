@@ -8,10 +8,10 @@
 #include <cassert>
 class abstract_sim_if_t;
 
-typedef enum {
+using endianness_t = enum {
   endianness_little,
   endianness_big
-} endianness_t;
+};
 
 template <typename T>
 class cfg_arg_t {
@@ -19,7 +19,7 @@ public:
   cfg_arg_t(T default_val)
     : value(default_val), was_set(false) {}
 
-  bool overridden() const { return was_set; }
+  [[nodiscard]] bool overridden() const { return was_set; }
 
   T operator()() const { return value; }
 
@@ -82,7 +82,7 @@ public:
   reg_t                   cache_blocksz;
   std::optional<abstract_sim_if_t*> external_simulator;
 
-  size_t nprocs() const { return hartids.size(); }
+  [[nodiscard]] size_t nprocs() const { return hartids.size(); }
   size_t max_hartid() const { return hartids.back(); }
 };
 

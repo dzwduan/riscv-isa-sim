@@ -2,12 +2,12 @@
 CompileFlags:
   # 添加项目相关的包含路径
   Add: [
-    "-I/home/dzw/riscv-isa-sim",
-    "-I/home/dzw/riscv-isa-sim/build",  # 用于生成的头文件
-    "-I/home/dzw/riscv-isa-sim/riscv",
-    "-I/home/dzw/riscv-isa-sim/fesvr",
-    "-I/home/dzw/riscv-isa-sim/softfloat",
-    "-I/home/dzw/riscv-isa-sim/spike_main",
+    "-I/home/duanzhenwei/riscv-isa-sim",
+    "-I/home/duanzhenwei/riscv-isa-sim/build",  # 用于生成的头文件
+    "-I/home/duanzhenwei/riscv-isa-sim/riscv",
+    "-I/home/duanzhenwei/riscv-isa-sim/fesvr",
+    "-I/home/duanzhenwei/riscv-isa-sim/softfloat",
+    "-I/home/duanzhenwei/riscv-isa-sim/spike_main",
     "-std=c++17",
     "-DHAVE_CONFIG_H",
     "-DRISCV_ENABLED",
