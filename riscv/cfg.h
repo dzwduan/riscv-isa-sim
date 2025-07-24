@@ -42,7 +42,7 @@ public:
 
   mem_cfg_t(reg_t base, reg_t size);
 
-  reg_t get_base() const {
+  [[nodiscard]] reg_t get_base() const {
     return base;
   }
 

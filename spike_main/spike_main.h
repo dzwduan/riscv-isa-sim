@@ -44,10 +44,10 @@ class spike_device {
 
 private:
     sim_t * sim;
-    // std::vector<mem_cfg_t> buffer;
-    // std::vector<std::pair<reg_t, mem_t*>> buffer_data;
-    // std::vector<mem_cfg_t> const_buffer;
-    // std::vector<std::pair<reg_t, mem_t*>> const_buffer_data;
+    std::vector<mem_cfg_t> buffer;
+    std::vector<std::pair<reg_t, mem_t*>> buffer_data;
+    std::vector<mem_cfg_t> const_buffer;
+    std::vector<std::pair<reg_t, mem_t*>> const_buffer_data;
     char* srcfilename;
     char* logfilename;
 };
