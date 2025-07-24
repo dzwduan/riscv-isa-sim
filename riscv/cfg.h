@@ -68,6 +68,7 @@ public:
   const char *            bootargs;
   const char *            isa;
   const char *            priv;
+  const char *            gpgpu_arch;
   bool                    misaligned;
   endianness_t            endianness;
   reg_t                   pmpregions;
